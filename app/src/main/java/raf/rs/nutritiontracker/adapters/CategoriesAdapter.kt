@@ -13,7 +13,6 @@ import raf.rs.nutritiontracker.ui.viewholders.MenuViewHolder
 
 class CategoriesAdapter(
     private val categories: List<Category>?,
-    private var sortDescending: Boolean = false
 ) :
     RecyclerView.Adapter<MenuViewHolder>() {
     private lateinit var parent: ViewGroup

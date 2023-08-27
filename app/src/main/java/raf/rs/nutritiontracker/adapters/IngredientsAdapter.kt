@@ -10,8 +10,7 @@ import raf.rs.nutritiontracker.ui.fragments.MealsFragment
 import raf.rs.nutritiontracker.ui.viewholders.MenuViewHolder
 
 class IngredientsAdapter(
-    private val ingredients: List<Ingredient>?,
-    private var sortDescending: Boolean = false
+    private val ingredients: List<Ingredient>?
 ) :
     RecyclerView.Adapter<MenuViewHolder>() {
     private lateinit var parent: ViewGroup

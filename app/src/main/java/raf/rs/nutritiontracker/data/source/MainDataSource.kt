@@ -1,4 +1,4 @@
-package raf.rs.nutritiontracker.data.datasource
+package raf.rs.nutritiontracker.data.source
 
 import io.reactivex.Observable
 import raf.rs.nutritiontracker.model.api.*

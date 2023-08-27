@@ -6,6 +6,7 @@ import android.os.Looper
 import android.view.View
 import android.webkit.WebChromeClient
 import android.webkit.WebView
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -19,12 +20,11 @@ import raf.rs.nutritiontracker.ui.viewmodels.MealDetailsViewModel
 class MealDetailsFragment(private val id: Int) : Fragment(R.layout.meal_details) {
     private val detailedMealModel: MainContract.DetailedMealModel by viewModel<MealDetailsViewModel>()
 
-//    var adapter: DetailedMealAdapter? = null
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val mealDetailsThumb = view.findViewById<ImageView>(R.id.mealDetailsThumb)
+        val mealSaveButton = view.findViewById<Button>(R.id.saveButton)
         val mealDetailsStr = view.findViewById<TextView>(R.id.mealDetailsStr)
         val mealDetailsTags = view.findViewById<TextView>(R.id.mealDetailsTags)
         val mealDetailsCategory = view.findViewById<TextView>(R.id.mealDetailsCategory)
@@ -36,13 +36,13 @@ class MealDetailsFragment(private val id: Int) : Fragment(R.layout.meal_details)
 
         Handler(Looper.getMainLooper()).postDelayed({
 
-//            button.setOnClickListener {
-//                val fragment = SaveMealPageFragment(detailedMealModel.meals.value?.get(0)?.idMeal)
-//                parentFragmentManager.beginTransaction()
-//                    .replace(R.id.fragment_container, fragment)
-//                    .addToBackStack(null)
-//                    .commit()
-//            }
+            mealSaveButton.setOnClickListener {
+                val fragment = MealSaveFragment(detailedMealModel.meals.value?.get(0))
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.mainFL, fragment)
+                    .addToBackStack(null)
+                    .commit()
+            }
 
             mealDetailsStr.text = detailedMealModel.meals.value?.get(0)?.strMeal
             mealDetailsTags.text = detailedMealModel.meals.value?.get(0)?.strTags

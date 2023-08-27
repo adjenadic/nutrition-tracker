@@ -97,14 +97,17 @@ class FilterViewModel(
                 categories.value?.sortedBy { it.strCategory }
                 categories.value?.filter { it.strCategory?.contains(query, true) == true }
             }
+
             2 -> {
                 areas.value?.sortedBy { it.strArea }
                 areas.value?.filter { it.strArea?.contains(query, true) == true }
             }
+
             3 -> {
                 ingredients.value?.sortedBy { it.strIngredient }
                 ingredients.value?.filter { it.strIngredient?.contains(query, true) == true }
             }
+
             else -> null
         }
 

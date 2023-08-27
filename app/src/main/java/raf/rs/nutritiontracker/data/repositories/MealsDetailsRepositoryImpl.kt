@@ -1,7 +1,7 @@
 package raf.rs.nutritiontracker.data.repositories
 
 import io.reactivex.Observable
-import raf.rs.nutritiontracker.data.datasource.MainDataSource
+import raf.rs.nutritiontracker.data.source.MainDataSource
 import raf.rs.nutritiontracker.model.entities.MealDetails
 
 class MealsDetailsRepositoryImpl(private val mainDataSource: MainDataSource) :

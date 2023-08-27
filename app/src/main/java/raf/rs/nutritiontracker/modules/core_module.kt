@@ -2,13 +2,16 @@ package raf.rs.nutritiontracker.modules
 
 import android.content.Context
 import android.content.SharedPreferences
+import androidx.room.Room.databaseBuilder
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.BuildConfig
 import org.koin.android.ext.koin.androidApplication
+import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
+import raf.rs.nutritiontracker.database.MealDB
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -24,9 +27,9 @@ val coreModule = module {
         )
     }
 
-//    single { databaseBuilder(androidContext(), MainDatabase::class.java, "MainDb")
-//        .fallbackToDestructiveMigration()
-//        .build() }
+    single { databaseBuilder(androidContext(), MealDB::class.java, "MealDB")
+        .fallbackToDestructiveMigration()
+        .build() }
 
     single { createMoshi() }
 

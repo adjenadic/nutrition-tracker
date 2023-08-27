@@ -62,7 +62,7 @@ class FilterFragment : Fragment(R.layout.filter_recyclerview) {
             activePage = 3
         }
 
-        buttonSort.setOnCheckedChangeListener { _, isChecked ->
+        buttonSort.setOnCheckedChangeListener { _, _ ->
             filterViewModel.filterByCriteria(
                 buttonSort.isChecked,
                 query,
@@ -71,17 +71,21 @@ class FilterFragment : Fragment(R.layout.filter_recyclerview) {
             when (activePage) {
                 1 -> {
                     filterViewModel.filtered.observe(viewLifecycleOwner) { filtered ->
-                        recyclerView.adapter = CategoriesAdapter(filtered as List<Category>?, buttonSort.isChecked)
+                        recyclerView.adapter =
+                            CategoriesAdapter(filtered as List<Category>?)
                     }
                 }
+
                 2 -> {
                     filterViewModel.filtered.observe(viewLifecycleOwner) { filtered ->
-                        recyclerView.adapter = AreasAdapter(filtered as List<Area>, isChecked)
+                        recyclerView.adapter = AreasAdapter(filtered as List<Area>)
                     }
                 }
+
                 3 -> {
                     filterViewModel.filtered.observe(viewLifecycleOwner) { filtered ->
-                        recyclerView.adapter = IngredientsAdapter(filtered as List<Ingredient>, isChecked)
+                        recyclerView.adapter =
+                            IngredientsAdapter(filtered as List<Ingredient>)
                     }
                 }
             }
@@ -102,7 +106,9 @@ class FilterFragment : Fragment(R.layout.filter_recyclerview) {
                                 activePage
                             )
                             filterViewModel.filtered.observe(viewLifecycleOwner) { filtered ->
-                                recyclerView.adapter = CategoriesAdapter(filtered as List<Category>?, buttonSort.isChecked)
+                                recyclerView.adapter = CategoriesAdapter(
+                                    filtered as List<Category>?
+                                )
                             }
                         } else {
                             filterViewModel.categories.observe(viewLifecycleOwner) { categories ->
@@ -110,6 +116,7 @@ class FilterFragment : Fragment(R.layout.filter_recyclerview) {
                             }
                         }
                     }
+
                     2 -> {
                         if (!query.isNullOrBlank()) {
                             filterViewModel.filterByCriteria(
@@ -118,7 +125,8 @@ class FilterFragment : Fragment(R.layout.filter_recyclerview) {
                                 activePage
                             )
                             filterViewModel.filtered.observe(viewLifecycleOwner) { filtered ->
-                                recyclerView.adapter = AreasAdapter(filtered as List<Area>?, buttonSort.isChecked)
+                                recyclerView.adapter =
+                                    AreasAdapter(filtered as List<Area>?)
                             }
                         } else {
                             filterViewModel.areas.observe(viewLifecycleOwner) { areas ->
@@ -126,6 +134,7 @@ class FilterFragment : Fragment(R.layout.filter_recyclerview) {
                             }
                         }
                     }
+
                     3 -> {
                         if (!query.isNullOrBlank()) {
                             filterViewModel.filterByCriteria(
@@ -134,7 +143,9 @@ class FilterFragment : Fragment(R.layout.filter_recyclerview) {
                                 activePage
                             )
                             filterViewModel.filtered.observe(viewLifecycleOwner) { filtered ->
-                                recyclerView.adapter = IngredientsAdapter(filtered as List<Ingredient>?, buttonSort.isChecked)
+                                recyclerView.adapter = IngredientsAdapter(
+                                    filtered as List<Ingredient>?
+                                )
                             }
                         } else {
                             filterViewModel.ingredients.observe(viewLifecycleOwner) { ingredients ->

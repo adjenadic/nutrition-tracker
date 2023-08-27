@@ -9,7 +9,7 @@ import raf.rs.nutritiontracker.model.entities.Area
 import raf.rs.nutritiontracker.ui.fragments.MealsFragment
 import raf.rs.nutritiontracker.ui.viewholders.MenuViewHolder
 
-class AreasAdapter(private val areas: List<Area>?, private var sortDescending: Boolean = false) :
+class AreasAdapter(private val areas: List<Area>?) :
     RecyclerView.Adapter<MenuViewHolder>() {
     private lateinit var parent: ViewGroup
 
