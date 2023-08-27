@@ -6,7 +6,7 @@ import io.reactivex.Single
 import raf.rs.nutritiontracker.database.MealDBDao
 import raf.rs.nutritiontracker.model.entities.MealDBEntity
 
-class MealDBRepositoryImpl (private val mealDBDao: MealDBDao): MealDBRepository {
+class MealDBRepositoryImpl(private val mealDBDao: MealDBDao) : MealDBRepository {
     override fun insertMeal(mealDBEntity: MealDBEntity): Completable {
         return mealDBDao.insertMeal(mealDBEntity)
     }

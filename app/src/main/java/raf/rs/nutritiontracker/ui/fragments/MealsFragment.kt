@@ -11,9 +11,9 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import raf.rs.nutritiontracker.R
 import raf.rs.nutritiontracker.adapters.MealsAdapter
 import raf.rs.nutritiontracker.database.MealDBConverter
-import raf.rs.nutritiontracker.ui.viewmodels.MealDBViewModel
 import raf.rs.nutritiontracker.model.entities.Meal
 import raf.rs.nutritiontracker.ui.contracts.MainContract
+import raf.rs.nutritiontracker.ui.viewmodels.MealDBViewModel
 import raf.rs.nutritiontracker.ui.viewmodels.MealsViewModel
 
 class MealsFragment(private val ids: String?, private val type: String) :

@@ -8,17 +8,17 @@ import raf.rs.nutritiontracker.data.repositories.CategoriesRepository
 import raf.rs.nutritiontracker.data.repositories.CategoriesRepositoryImpl
 import raf.rs.nutritiontracker.data.repositories.IngredientsRepository
 import raf.rs.nutritiontracker.data.repositories.IngredientsRepositoryImpl
+import raf.rs.nutritiontracker.data.repositories.MealDBRepository
+import raf.rs.nutritiontracker.data.repositories.MealDBRepositoryImpl
 import raf.rs.nutritiontracker.data.repositories.MealsDetailsRepository
 import raf.rs.nutritiontracker.data.repositories.MealsDetailsRepositoryImpl
 import raf.rs.nutritiontracker.data.repositories.MealsRepository
 import raf.rs.nutritiontracker.data.repositories.MealsRepositoryImpl
 import raf.rs.nutritiontracker.data.source.MainDataSource
 import raf.rs.nutritiontracker.database.MealDB
-import raf.rs.nutritiontracker.data.repositories.MealDBRepository
-import raf.rs.nutritiontracker.data.repositories.MealDBRepositoryImpl
-import raf.rs.nutritiontracker.ui.viewmodels.MealDBViewModel
 import raf.rs.nutritiontracker.ui.viewmodels.CategoriesViewModel
 import raf.rs.nutritiontracker.ui.viewmodels.FilterViewModel
+import raf.rs.nutritiontracker.ui.viewmodels.MealDBViewModel
 import raf.rs.nutritiontracker.ui.viewmodels.MealDetailsViewModel
 import raf.rs.nutritiontracker.ui.viewmodels.MealsViewModel
 

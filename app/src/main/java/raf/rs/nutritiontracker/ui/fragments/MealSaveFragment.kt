@@ -25,9 +25,9 @@ import com.bumptech.glide.Glide
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import raf.rs.nutritiontracker.R
 import raf.rs.nutritiontracker.database.MealDBConverter
-import raf.rs.nutritiontracker.ui.viewmodels.MealDBViewModel
 import raf.rs.nutritiontracker.model.entities.MealDetails
 import raf.rs.nutritiontracker.ui.contracts.MainContract
+import raf.rs.nutritiontracker.ui.viewmodels.MealDBViewModel
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -36,7 +36,8 @@ import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 
-class MealSaveFragment(private val meal: MealDetails?, private val editMode: Boolean = false) : Fragment(R.layout.meal_save) {
+class MealSaveFragment(private val meal: MealDetails?, private val editMode: Boolean = false) :
+    Fragment(R.layout.meal_save) {
     private val mealDBViewModel: MainContract.DBViewModel by viewModel<MealDBViewModel>()
 
     private var datePickerDialog: DatePickerDialog? = null
@@ -105,8 +106,10 @@ class MealSaveFragment(private val meal: MealDetails?, private val editMode: Boo
                         Toast.makeText(view.context, "Meal inserted.", Toast.LENGTH_SHORT).show()
                         activity?.supportFragmentManager?.popBackStack()
                     }
+
                     override fun onMealError(error: Throwable) {
-                        Toast.makeText(view.context, "Meal not inserted.", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(view.context, "Meal not inserted.", Toast.LENGTH_SHORT)
+                            .show()
                     }
                 })
             }
@@ -115,6 +118,7 @@ class MealSaveFragment(private val meal: MealDetails?, private val editMode: Boo
                     Toast.makeText(view.context, "Meal inserted.", Toast.LENGTH_SHORT).show()
                     activity?.supportFragmentManager?.popBackStack()
                 }
+
                 override fun onMealError(error: Throwable) {
                     Toast.makeText(view.context, "Meal not inserted.", Toast.LENGTH_SHORT).show()
                 }
@@ -155,8 +159,14 @@ class MealSaveFragment(private val meal: MealDetails?, private val editMode: Boo
             ) {
                 val actionImageCaptureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
 
-                val externalFilesDir = view.context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-                val imageFile = File.createTempFile("IMG_" + SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date()), ".jpeg", externalFilesDir)
+                val externalFilesDir =
+                    view.context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+                val imageFile = File.createTempFile(
+                    "IMG_" + SimpleDateFormat(
+                        "yyyyMMdd_HHmmss",
+                        Locale.getDefault()
+                    ).format(Date()), ".jpeg", externalFilesDir
+                )
 
                 imagePath = imageFile.absolutePath
                 actionImageCaptureIntent.putExtra(MediaStore.ACTION_IMAGE_CAPTURE, "data")

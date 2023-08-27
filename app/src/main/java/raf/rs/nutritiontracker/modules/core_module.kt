@@ -27,9 +27,11 @@ val coreModule = module {
         )
     }
 
-    single { databaseBuilder(androidContext(), MealDB::class.java, "MealDB")
-        .fallbackToDestructiveMigration()
-        .build() }
+    single {
+        databaseBuilder(androidContext(), MealDB::class.java, "MealDB")
+            .fallbackToDestructiveMigration()
+            .build()
+    }
 
     single { createMoshi() }
 

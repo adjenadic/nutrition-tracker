@@ -2,11 +2,11 @@ package raf.rs.nutritiontracker.ui.contracts
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import raf.rs.nutritiontracker.model.entities.MealDBEntity
 import raf.rs.nutritiontracker.model.entities.Area
 import raf.rs.nutritiontracker.model.entities.Category
 import raf.rs.nutritiontracker.model.entities.Ingredient
 import raf.rs.nutritiontracker.model.entities.Meal
+import raf.rs.nutritiontracker.model.entities.MealDBEntity
 import raf.rs.nutritiontracker.model.entities.MealDetails
 
 interface MainContract {

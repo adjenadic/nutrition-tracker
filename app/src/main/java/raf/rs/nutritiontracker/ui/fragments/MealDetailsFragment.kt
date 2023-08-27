@@ -74,7 +74,10 @@ class MealDetailsFragment(private val id: Int) : Fragment(R.layout.meal_details)
             mealDetailsInstructions.text = mealDetailsViewModel.meals.value?.get(0)?.strInstructions
 
             val strYT =
-                mealDetailsViewModel.meals.value?.get(0)?.strYoutube?.replace("/watch?v=", "/embed/")
+                mealDetailsViewModel.meals.value?.get(0)?.strYoutube?.replace(
+                    "/watch?v=",
+                    "/embed/"
+                )
             mealDetailsWebView.loadDataWithBaseURL(
                 null,
                 """<html><head><style type="text/css">body{margin:0;padding:0;overflow:hidden;}</style></head><body><iframe width="100%" height="100%" src="$strYT" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></body></html>""",

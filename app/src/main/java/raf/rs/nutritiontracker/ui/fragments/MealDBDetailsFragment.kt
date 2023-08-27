@@ -14,10 +14,10 @@ import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import raf.rs.nutritiontracker.R
-import raf.rs.nutritiontracker.ui.viewmodels.MealDBViewModel
 import raf.rs.nutritiontracker.model.entities.Meal
 import raf.rs.nutritiontracker.model.entities.getIngredientAndMeasure
 import raf.rs.nutritiontracker.ui.contracts.MainContract
+import raf.rs.nutritiontracker.ui.viewmodels.MealDBViewModel
 import raf.rs.nutritiontracker.ui.viewmodels.MealDetailsViewModel
 
 class MealDBDetailsFragment(private val meal: Meal) : Fragment(R.layout.meal_saved_details) {
@@ -49,15 +49,19 @@ class MealDBDetailsFragment(private val meal: Meal) : Fragment(R.layout.meal_sav
                     .commit()
             }
             mealDeleteButton.setOnClickListener {
-                mealDBViewModel.deleteMealByIDFromDB(mealDBViewModel.mealDB.value!!.idMeal, object : MainContract.MealDBCallback {
-                    override fun onMealSuccess() {
-                        Toast.makeText(view.context, "Meal deleted.", Toast.LENGTH_SHORT).show()
-                        activity?.supportFragmentManager?.popBackStack()
-                    }
-                    override fun onMealError(error: Throwable) {
-                        Toast.makeText(view.context, "Meal not deleted.", Toast.LENGTH_SHORT).show()
-                    }
-                })
+                mealDBViewModel.deleteMealByIDFromDB(
+                    mealDBViewModel.mealDB.value!!.idMeal,
+                    object : MainContract.MealDBCallback {
+                        override fun onMealSuccess() {
+                            Toast.makeText(view.context, "Meal deleted.", Toast.LENGTH_SHORT).show()
+                            activity?.supportFragmentManager?.popBackStack()
+                        }
+
+                        override fun onMealError(error: Throwable) {
+                            Toast.makeText(view.context, "Meal not deleted.", Toast.LENGTH_SHORT)
+                                .show()
+                        }
+                    })
             }
 
             mealSavedStr.text = mealDetailsViewModel.meals.value?.get(0)?.strMeal
@@ -90,7 +94,10 @@ class MealDBDetailsFragment(private val meal: Meal) : Fragment(R.layout.meal_sav
             mealSavedInstructions.text = mealDetailsViewModel.meals.value?.get(0)?.strInstructions
 
             val strYT =
-                mealDetailsViewModel.meals.value?.get(0)?.strYoutube?.replace("/watch?v=", "/embed/")
+                mealDetailsViewModel.meals.value?.get(0)?.strYoutube?.replace(
+                    "/watch?v=",
+                    "/embed/"
+                )
             mealSavedWebView.loadDataWithBaseURL(
                 null,
                 """<html><head><style type="text/css">body{margin:0;padding:0;overflow:hidden;}</style></head><body><iframe width="100%" height="100%" src="$strYT" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></body></html>""",
