@@ -24,10 +24,10 @@ import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import raf.rs.nutritiontracker.R
-import raf.rs.nutritiontracker.database.MealDBContract
 import raf.rs.nutritiontracker.database.MealDBConverter
-import raf.rs.nutritiontracker.database.MealDBViewModel
+import raf.rs.nutritiontracker.ui.viewmodels.MealDBViewModel
 import raf.rs.nutritiontracker.model.entities.MealDetails
+import raf.rs.nutritiontracker.ui.contracts.MainContract
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -36,13 +36,13 @@ import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 
-class MealSaveFragment(private val meal: MealDetails?) : Fragment(R.layout.meal_save) {
-    private val mealDBVM: MealDBContract.ViewModel by viewModel<MealDBViewModel>()
-    private lateinit var takePictureLauncher: ActivityResultLauncher<Intent>
-
-    private var picPath: String? = null
+class MealSaveFragment(private val meal: MealDetails?, private val editMode: Boolean = false) : Fragment(R.layout.meal_save) {
+    private val mealDBViewModel: MainContract.DBViewModel by viewModel<MealDBViewModel>()
 
     private var datePickerDialog: DatePickerDialog? = null
+
+    private lateinit var takePictureLauncher: ActivityResultLauncher<Intent>
+    private var imagePath: String? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -94,18 +94,28 @@ class MealSaveFragment(private val meal: MealDetails?) : Fragment(R.layout.meal_
         }
 
         saveMealBtn.setOnClickListener {
-            val mealEntity = MealDBConverter.fromMealDetails(meal)!!
+            val mealEntity = MealDBConverter.toMealEntity(meal)!!
             val date = Date()
             mealEntity.dateModified = date.time
             mealEntity.datePlanned = saveMealBtn.text as String
             mealEntity.dayPeriod = saveMealSpinner.selectedItem as String
-            mealDBVM.insertMeal(mealEntity, object : MealDBContract.MealCallback {
-                override fun onMealInserted() {
+            if (editMode) {
+                mealDBViewModel.updateMealInDB(mealEntity, object : MainContract.MealDBCallback {
+                    override fun onMealSuccess() {
+                        Toast.makeText(view.context, "Meal inserted.", Toast.LENGTH_SHORT).show()
+                        activity?.supportFragmentManager?.popBackStack()
+                    }
+                    override fun onMealError(error: Throwable) {
+                        Toast.makeText(view.context, "Meal not inserted.", Toast.LENGTH_SHORT).show()
+                    }
+                })
+            }
+            mealDBViewModel.insertMealInDB(mealEntity, object : MainContract.MealDBCallback {
+                override fun onMealSuccess() {
                     Toast.makeText(view.context, "Meal inserted.", Toast.LENGTH_SHORT).show()
                     activity?.supportFragmentManager?.popBackStack()
                 }
-
-                override fun onInsertError(error: Throwable) {
+                override fun onMealError(error: Throwable) {
                     Toast.makeText(view.context, "Meal not inserted.", Toast.LENGTH_SHORT).show()
                 }
             })
@@ -116,19 +126,13 @@ class MealSaveFragment(private val meal: MealDetails?) : Fragment(R.layout.meal_
                 if (result.resultCode == Activity.RESULT_OK) {
                     val imageBitmap = result.data?.extras?.get("data") as? Bitmap
                     if (imageBitmap != null) {
-                        meal?.strImageSource = if (picPath.isNullOrBlank()) {
-                            meal?.strImageSource
-                        } else {
-                            picPath
-                        }
-                        meal?.strMealThumb = if (picPath.isNullOrBlank()) {
-                            meal?.strImageSource
-                        } else {
-                            picPath
+                        if (!imagePath.isNullOrBlank()) {
+                            meal?.strImageSource = imagePath
+                            meal?.strMealThumb = imagePath
                         }
                         saveMealThumb.setImageBitmap(imageBitmap)
                         try {
-                            val fos = FileOutputStream(File(picPath))
+                            val fos = FileOutputStream(File(imagePath!!))
                             imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos)
                             fos.flush()
                             fos.close()
@@ -149,16 +153,14 @@ class MealSaveFragment(private val meal: MealDetails?) : Fragment(R.layout.meal_
                     camPerm
                 ) == PackageManager.PERMISSION_GRANTED
             ) {
-                val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+                val actionImageCaptureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
 
-                val timestamp =
-                    SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
-                val storageDir = view.context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-                val imageFile = File.createTempFile("IMG_$timestamp", ".jpeg", storageDir)
+                val externalFilesDir = view.context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+                val imageFile = File.createTempFile("IMG_" + SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date()), ".jpeg", externalFilesDir)
 
-                picPath = imageFile.absolutePath
-                takePictureIntent.putExtra(MediaStore.ACTION_IMAGE_CAPTURE, "data")
-                takePictureLauncher.launch(takePictureIntent)
+                imagePath = imageFile.absolutePath
+                actionImageCaptureIntent.putExtra(MediaStore.ACTION_IMAGE_CAPTURE, "data")
+                takePictureLauncher.launch(actionImageCaptureIntent)
             } else {
                 ActivityCompat.requestPermissions(requireActivity(), arrayOf(camPerm), 123)
             }

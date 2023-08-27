@@ -2,6 +2,7 @@ package raf.rs.nutritiontracker.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import raf.rs.nutritiontracker.model.entities.MealDBEntity
 
 @Database(
     entities = [MealDBEntity::class],

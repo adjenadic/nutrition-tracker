@@ -21,18 +21,22 @@
         android:id="@+id/menuSearchView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
         android:iconifiedByDefault="false"
         android:queryHint="@string/search"
-        app:layout_constraintEnd_toStartOf="@+id/toggleButton"
+        app:layout_constraintEnd_toStartOf="@+id/menuSavedButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ToggleButton
-        android:id="@+id/toggleButton"
-        android:layout_width="wrap_content"
+        android:id="@+id/menuSavedButton"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="5dp"
+        android:backgroundTint="@color/green"
         android:text="ToggleButton"
+        android:textOff="@string/all_meals"
+        android:textOn="@string/saved_meals"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

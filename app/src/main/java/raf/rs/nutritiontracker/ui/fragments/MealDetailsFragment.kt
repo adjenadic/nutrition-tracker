@@ -18,7 +18,7 @@ import raf.rs.nutritiontracker.ui.contracts.MainContract
 import raf.rs.nutritiontracker.ui.viewmodels.MealDetailsViewModel
 
 class MealDetailsFragment(private val id: Int) : Fragment(R.layout.meal_details) {
-    private val detailedMealModel: MainContract.DetailedMealModel by viewModel<MealDetailsViewModel>()
+    private val mealDetailsViewModel: MainContract.MealDetailsViewModel by viewModel<MealDetailsViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -32,23 +32,23 @@ class MealDetailsFragment(private val id: Int) : Fragment(R.layout.meal_details)
         val mealDetailsIngredients = view.findViewById<TextView>(R.id.mealDetailsIng)
         val mealDetailsInstructions = view.findViewById<TextView>(R.id.mealDetailsInstructions)
         val mealDetailsWebView = view.findViewById<WebView>(R.id.mealDetailsYT)
-        detailedMealModel.getMeal(id.toString())
+        mealDetailsViewModel.getMeal(id.toString())
 
         Handler(Looper.getMainLooper()).postDelayed({
 
             mealSaveButton.setOnClickListener {
-                val fragment = MealSaveFragment(detailedMealModel.meals.value?.get(0))
+                val fragment = MealSaveFragment(mealDetailsViewModel.meals.value?.get(0))
                 parentFragmentManager.beginTransaction()
                     .replace(R.id.mainFL, fragment)
                     .addToBackStack(null)
                     .commit()
             }
 
-            mealDetailsStr.text = detailedMealModel.meals.value?.get(0)?.strMeal
-            mealDetailsTags.text = detailedMealModel.meals.value?.get(0)?.strTags
-            mealDetailsCategory.text = detailedMealModel.meals.value?.get(0)?.strCategory
-            mealDetailsArea.text = detailedMealModel.meals.value?.get(0)?.strArea
-            val detailedMeal = detailedMealModel.meals.value?.get(0)
+            mealDetailsStr.text = mealDetailsViewModel.meals.value?.get(0)?.strMeal
+            mealDetailsTags.text = mealDetailsViewModel.meals.value?.get(0)?.strTags
+            mealDetailsCategory.text = mealDetailsViewModel.meals.value?.get(0)?.strCategory
+            mealDetailsArea.text = mealDetailsViewModel.meals.value?.get(0)?.strArea
+            val detailedMeal = mealDetailsViewModel.meals.value?.get(0)
             val ingredientsMap = mutableMapOf<String, String?>()
 
             if (detailedMeal != null) {
@@ -71,10 +71,10 @@ class MealDetailsFragment(private val id: Int) : Fragment(R.layout.meal_details)
                 }
 
             mealDetailsIngredients.text = formattedIngredients
-            mealDetailsInstructions.text = detailedMealModel.meals.value?.get(0)?.strInstructions
+            mealDetailsInstructions.text = mealDetailsViewModel.meals.value?.get(0)?.strInstructions
 
             val strYT =
-                detailedMealModel.meals.value?.get(0)?.strYoutube?.replace("/watch?v=", "/embed/")
+                mealDetailsViewModel.meals.value?.get(0)?.strYoutube?.replace("/watch?v=", "/embed/")
             mealDetailsWebView.loadDataWithBaseURL(
                 null,
                 """<html><head><style type="text/css">body{margin:0;padding:0;overflow:hidden;}</style></head><body><iframe width="100%" height="100%" src="$strYT" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></body></html>""",
@@ -86,7 +86,7 @@ class MealDetailsFragment(private val id: Int) : Fragment(R.layout.meal_details)
             mealDetailsWebView.webChromeClient = WebChromeClient()
 
             Glide.with(mealDetailsThumb.context)
-                .load(detailedMealModel.meals.value?.get(0)?.strMealThumb)
+                .load(mealDetailsViewModel.meals.value?.get(0)?.strMealThumb)
                 .into(mealDetailsThumb)
         }, 150)
     }

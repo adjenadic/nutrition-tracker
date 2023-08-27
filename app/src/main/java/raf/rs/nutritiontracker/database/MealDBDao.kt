@@ -7,6 +7,7 @@ import androidx.room.Update
 import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.Single
+import raf.rs.nutritiontracker.model.entities.MealDBEntity
 
 @Dao
 abstract class MealDBDao {

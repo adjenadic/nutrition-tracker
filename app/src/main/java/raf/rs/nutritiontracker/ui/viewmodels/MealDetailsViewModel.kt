@@ -12,7 +12,7 @@ import timber.log.Timber
 
 class MealDetailsViewModel(private val mealsDetailsRepository: MealsDetailsRepository) :
     ViewModel(),
-    MainContract.DetailedMealModel {
+    MainContract.MealDetailsViewModel {
     private val mealsD = CompositeDisposable()
     override val meals: MutableLiveData<List<MealDetails>> = MutableLiveData()
     override val meal: MutableLiveData<MealDetails> = MutableLiveData()

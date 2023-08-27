@@ -1,4 +1,4 @@
-package raf.rs.nutritiontracker.database
+package raf.rs.nutritiontracker.model.entities
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

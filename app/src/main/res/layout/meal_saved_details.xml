@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/mealSavedThumb"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/mealSavedStr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="TextView"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mealSavedThumb" />
+
+        <TextView
+            android:id="@+id/mealSavedTags"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:justificationMode="inter_word"
+            android:text="TextView"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mealSavedStr" />
+
+        <TextView
+            android:id="@+id/mealSavedArea"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:justificationMode="inter_word"
+            android:text="TextView"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mealSavedCategory" />
+
+        <TextView
+            android:id="@+id/mealSavedCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:justificationMode="inter_word"
+            android:text="TextView"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mealSavedTags" />
+
+        <TextView
+            android:id="@+id/mealSavedIngText"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:justificationMode="inter_word"
+            android:text="Ingredients and Measurements"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mealSavedArea" />
+
+        <TextView
+            android:id="@+id/mealSavedIng"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="1dp"
+            android:justificationMode="inter_word"
+            android:text="TextView"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mealSavedIngText" />
+
+        <TextView
+            android:id="@+id/mealSavedInstructions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="1dp"
+            android:layout_x="168dp"
+            android:layout_y="-51dp"
+            android:justificationMode="inter_word"
+            android:text="TextView"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mealSavedInstructionsText" />
+
+        <TextView
+            android:id="@+id/mealSavedInstructionsText"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:layout_x="168dp"
+            android:layout_y="-51dp"
+            android:justificationMode="inter_word"
+            android:text="Instructions"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mealSavedIng" />
+
+        <WebView
+            android:id="@+id/mealSavedYT"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_marginTop="24dp"
+            android:layout_x="0dp"
+            android:layout_y="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mealSavedInstructions"></WebView>
+
+        <Button
+            android:id="@+id/deleteButton"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@color/green"
+            android:text="-"
+            android:textColor="@color/white"
+            android:textSize="34sp"
+            app:layout_constraintBottom_toBottomOf="@+id/mealSavedThumb"
+            app:layout_constraintEnd_toEndOf="@+id/mealSavedThumb" />
+
+        <Button
+            android:id="@+id/editButton"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@color/green"
+            android:text="="
+            android:textColor="@color/white"
+            android:textSize="34sp"
+            app:layout_constraintBottom_toBottomOf="@+id/mealSavedThumb"
+            app:layout_constraintEnd_toStartOf="@+id/deleteButton" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

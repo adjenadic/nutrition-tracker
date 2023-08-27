@@ -2,6 +2,7 @@ package raf.rs.nutritiontracker.ui.contracts
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import raf.rs.nutritiontracker.model.entities.MealDBEntity
 import raf.rs.nutritiontracker.model.entities.Area
 import raf.rs.nutritiontracker.model.entities.Category
 import raf.rs.nutritiontracker.model.entities.Ingredient
@@ -45,22 +46,27 @@ interface MainContract {
         fun getMealsByName(id: String)
     }
 
-    interface DetailedMealModel {
+    interface MealDetailsViewModel {
         val meal: LiveData<MealDetails>
         val meals: LiveData<List<MealDetails>>
 
         fun getMeal(id: String)
     }
 
-//    interface SaveMealModel {
-//        val meals: LiveData<List<MealSave>>
-//        val savedMealsCount: LiveData<List<SavedMealsCount>>
-//
-//        fun getAllSavedMeals()
-//        fun insertSavedMeal(mealSave: MealSave)
-//        fun deleteAllStudents()
-//        fun deleteMeal(id: Int)
-//        fun updateMealById(id: Long, name: String, strYoutube: String, strInstructions: String)
-//        fun getMealFromLast7Days()
-//    }
+    interface DBViewModel {
+        val mealDB: LiveData<MealDBEntity>
+        val mealsDB: LiveData<List<MealDBEntity>>
+
+        fun insertMealInDB(mealDBEntity: MealDBEntity, callback: MealDBCallback)
+        fun deleteAllMealsFromDB(callback: MealDBCallback)
+        fun deleteMealByIDFromDB(id: Int, callback: MealDBCallback)
+        fun getAllMealsFromDB()
+        fun getMealByIDFromDB(id: Int)
+        fun updateMealInDB(mealDBEntity: MealDBEntity, callback: MealDBCallback)
+    }
+
+    interface MealDBCallback {
+        fun onMealSuccess()
+        fun onMealError(error: Throwable)
+    }
 }
