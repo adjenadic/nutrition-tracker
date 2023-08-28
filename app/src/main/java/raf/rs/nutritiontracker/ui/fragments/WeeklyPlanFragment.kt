@@ -44,7 +44,7 @@ class WeeklyPlanFragment : Fragment(R.layout.weekly_plan_layout) {
         btnReview.setOnClickListener {
             val fragmentTransaction = parentFragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.mainFL, ReviewPlanFragment())
-            fragmentTransaction.addToBackStack("back4")
+            fragmentTransaction.addToBackStack("ReviewPlanFragment")
             fragmentTransaction.commit()
         }
     }
@@ -52,7 +52,7 @@ class WeeklyPlanFragment : Fragment(R.layout.weekly_plan_layout) {
     private fun fragmentTransaction(day: String) {
         val fragmentTransaction = parentFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.mainFL, DailyPlanFragment(day))
-        fragmentTransaction.addToBackStack("back3")
+        fragmentTransaction.addToBackStack("RPDailyPlanFragment")
         fragmentTransaction.commit()
     }
 }

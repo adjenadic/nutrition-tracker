@@ -9,9 +9,9 @@
     <string name="plan">Plan</string>
     <string name="save">Save</string>
     <string name="search">Search</string>
-    <string name="sort">SORT</string>
-    <string name="sort_asc">SORT ASC</string>
-    <string name="sort_desc">SORT DESC</string>
+    <string name="sort">Sort</string>
+    <string name="sort_asc">Sort ASC</string>
+    <string name="sort_desc">Sort DESC</string>
     <string name="all_meals">All Meals</string>
     <string name="saved_meals">Saved Meals</string>
     <string name="select_date">Select date:</string>
@@ -20,6 +20,7 @@
     <string name="categories">Categories</string>
     <string name="areas">Areas</string>
     <string name="ingredients">Ingredients</string>
+    <string name="stats_7_days">Meals saved in the last seven days:</string>
     <string name="pick_a_day">Pick a day for the plan:</string>
     <string name="monday">Monday</string>
     <string name="tuesday">Tuesday</string>

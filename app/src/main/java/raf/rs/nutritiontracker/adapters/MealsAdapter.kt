@@ -45,6 +45,7 @@ class MealsAdapter(private val meals: List<Meal>?, private val mealInDB: Boolean
                 val fragmentManager = (parent.context as AppCompatActivity).supportFragmentManager
                 val fragmentTransaction = fragmentManager.beginTransaction()
                 fragmentTransaction.replace(R.id.mainFL, fragment)
+                fragmentTransaction.addToBackStack("MealsAdapter")
                 fragmentTransaction.commit()
             }
 

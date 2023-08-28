@@ -11,6 +11,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.bumptech.glide.Glide
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import raf.rs.nutritiontracker.R
@@ -54,7 +55,10 @@ class MealDBDetailsFragment(private val meal: Meal) : Fragment(R.layout.meal_sav
                     object : MainContract.MealDBCallback {
                         override fun onMealSuccess() {
                             Toast.makeText(view.context, "Meal deleted.", Toast.LENGTH_SHORT).show()
-                            activity?.supportFragmentManager?.popBackStack()
+                            parentFragmentManager.popBackStack(
+                                "MealsAdapter",
+                                FragmentManager.POP_BACK_STACK_INCLUSIVE
+                            )
                         }
 
                         override fun onMealError(error: Throwable) {

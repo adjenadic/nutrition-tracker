@@ -38,27 +38,27 @@ class StatsFragment : Fragment(R.layout.stats_layout) {
                 }
             }
 
-            val dataSet = PieDataSet(entries, "Days")
+            val dataSet = PieDataSet(entries, "")
             dataSet.valueTextSize = 16f
             dataSet.colors = listOf(
                 Color.WHITE,
-                Color.BLUE,
-                Color.CYAN,
-                Color.GREEN,
-                Color.MAGENTA,
                 Color.RED,
-                Color.YELLOW
+                Color.YELLOW,
+                Color.GREEN,
+                Color.CYAN,
+                Color.BLUE,
+                Color.MAGENTA
             )
             val data = PieData(dataSet)
             statsChart.apply {
                 setUsePercentValues(false)
                 description.isEnabled = false
                 legend.isEnabled = true
+                legend.textColor = Color.WHITE
                 holeRadius = 1f
                 transparentCircleRadius = 1f
-                setEntryLabelColor(Color.WHITE)
+                setEntryLabelColor(Color.BLACK)
                 setEntryLabelTextSize(16f)
-                animateY(1000)
             }
             statsChart.data = data
             statsChart.invalidate()

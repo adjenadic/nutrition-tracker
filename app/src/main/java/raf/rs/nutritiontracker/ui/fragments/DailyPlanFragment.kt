@@ -59,8 +59,6 @@ class DailyPlanFragment(var day: String) : Fragment(R.layout.daily_plan_layout) 
             if (!chosenPlan?.get(day)?.get("Dinner")?.strMeal.isNullOrBlank()) {
                 chooseDinner.text = chosenPlan?.get(day)?.get("Dinner")?.strMeal
             }
-
-            println(chooseBreakfast.text)
         }
 
         val selected = planViewModel.getSelectedMeal()

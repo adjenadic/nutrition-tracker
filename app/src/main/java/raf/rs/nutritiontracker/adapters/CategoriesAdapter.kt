@@ -50,6 +50,7 @@ class CategoriesAdapter(
                 val fragmentManager = (parent.context as AppCompatActivity).supportFragmentManager
                 val fragmentTransaction = fragmentManager.beginTransaction()
                 fragmentTransaction.replace(R.id.mainFL, fragment)
+                fragmentTransaction.addToBackStack("CategoriesAdapter")
                 fragmentTransaction.commit()
             }
 

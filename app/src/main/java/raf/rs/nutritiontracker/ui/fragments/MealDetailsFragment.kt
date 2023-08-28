@@ -48,14 +48,14 @@ class MealDetailsFragment(private val id: Int, private val meal: Meal) :
                     .commit()
             }
 
-            val frag = parentFragmentManager.findFragmentByTag("DailyPlanFragment")
+            val dailyPlanFragment = parentFragmentManager.findFragmentByTag("DailyPlanFragment")
 
-            if (frag != null && frag.isInBackStack()) {
+            if (dailyPlanFragment != null && dailyPlanFragment.isInBackStack()) {
                 mealSaveButton.setOnClickListener {
                     planViewModel.setSelectedMeal(meal)
 
-                    if (frag is DailyPlanFragment) {
-                        frag.selectedMeal = meal
+                    if (dailyPlanFragment is DailyPlanFragment) {
+                        dailyPlanFragment.selectedMeal = meal
                     }
 
                     parentFragmentManager.popBackStack(
