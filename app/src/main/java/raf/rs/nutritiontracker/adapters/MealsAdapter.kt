@@ -39,7 +39,7 @@ class MealsAdapter(private val meals: List<Meal>?, private val mealInDB: Boolean
                     )
                 } else {
                     MealDetailsFragment(
-                        meal.idMeal
+                        meal.idMeal, meal
                     )
                 }
                 val fragmentManager = (parent.context as AppCompatActivity).supportFragmentManager

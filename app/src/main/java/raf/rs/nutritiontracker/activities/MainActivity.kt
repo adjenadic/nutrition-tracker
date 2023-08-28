@@ -8,6 +8,7 @@ import raf.rs.nutritiontracker.R
 import raf.rs.nutritiontracker.ui.fragments.CategoriesFragment
 import raf.rs.nutritiontracker.ui.fragments.FilterFragment
 import raf.rs.nutritiontracker.ui.fragments.StatsFragment
+import raf.rs.nutritiontracker.ui.fragments.WeeklyPlanFragment
 import timber.log.Timber
 
 class MainActivity : AppCompatActivity() {
@@ -35,6 +36,11 @@ class MainActivity : AppCompatActivity() {
 
                 R.id.statsID -> {
                     transferFragment(StatsFragment())
+                    true
+                }
+
+                R.id.planID -> {
+                    transferFragment(WeeklyPlanFragment())
                     true
                 }
 

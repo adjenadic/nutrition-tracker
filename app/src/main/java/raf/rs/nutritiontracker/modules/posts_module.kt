@@ -21,6 +21,7 @@ import raf.rs.nutritiontracker.ui.viewmodels.FilterViewModel
 import raf.rs.nutritiontracker.ui.viewmodels.MealDBViewModel
 import raf.rs.nutritiontracker.ui.viewmodels.MealDetailsViewModel
 import raf.rs.nutritiontracker.ui.viewmodels.MealsViewModel
+import raf.rs.nutritiontracker.ui.viewmodels.PlanViewModel
 
 val postsModule = module {
     viewModel {
@@ -58,4 +59,7 @@ val postsModule = module {
     single<MealDBRepository> { MealDBRepositoryImpl(get()) }
 
     single { get<MealDB>().getMealDao() }
+
+
+    viewModel { PlanViewModel() }
 }

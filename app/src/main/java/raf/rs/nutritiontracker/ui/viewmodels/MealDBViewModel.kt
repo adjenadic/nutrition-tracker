@@ -6,6 +6,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import raf.rs.nutritiontracker.data.repositories.MealDBRepository
+import raf.rs.nutritiontracker.model.entities.MealCount
 import raf.rs.nutritiontracker.model.entities.MealDBEntity
 import raf.rs.nutritiontracker.ui.contracts.MainContract
 import timber.log.Timber
@@ -14,6 +15,7 @@ class MealDBViewModel(private val mealDBRepository: MealDBRepository) : ViewMode
     MainContract.DBViewModel {
     override val mealsDB: MutableLiveData<List<MealDBEntity>> = MutableLiveData()
     override val mealDB: MutableLiveData<MealDBEntity> = MutableLiveData()
+    override val mealsSevenDaysDB: MutableLiveData<List<MealCount>> = MutableLiveData()
     private val mealsDBD = CompositeDisposable()
 
     override fun insertMealInDB(mealDBEntity: MealDBEntity, callback: MainContract.MealDBCallback) {
@@ -117,6 +119,24 @@ class MealDBViewModel(private val mealDBRepository: MealDBRepository) : ViewMode
                 {
                     Timber.e(it)
                     callback.onMealError(it)
+                }
+            )
+        mealsDBD.add(mealDB)
+    }
+
+    override fun getMealsForLastSevenDaysFromDB() {
+        val mealDB = mealDBRepository
+            .getMealsForLastSevenDaysFromDB()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                {
+                    mealsSevenDaysDB.value = it
+                    println("IT: $it")
+                    Timber.e("Update completed.")
+                },
+                {
+                    Timber.e(it)
                 }
             )
         mealsDBD.add(mealDB)

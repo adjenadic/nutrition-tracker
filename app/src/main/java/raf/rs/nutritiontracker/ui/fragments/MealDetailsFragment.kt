@@ -10,15 +10,20 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.bumptech.glide.Glide
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import raf.rs.nutritiontracker.R
+import raf.rs.nutritiontracker.model.entities.Meal
 import raf.rs.nutritiontracker.model.entities.getIngredientAndMeasure
 import raf.rs.nutritiontracker.ui.contracts.MainContract
 import raf.rs.nutritiontracker.ui.viewmodels.MealDetailsViewModel
+import raf.rs.nutritiontracker.ui.viewmodels.PlanViewModel
 
-class MealDetailsFragment(private val id: Int) : Fragment(R.layout.meal_details) {
+class MealDetailsFragment(private val id: Int, private val meal: Meal) :
+    Fragment(R.layout.meal_details) {
     private val mealDetailsViewModel: MainContract.MealDetailsViewModel by viewModel<MealDetailsViewModel>()
+    private val planViewModel: MainContract.PlanViewModel by viewModel<PlanViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -35,13 +40,29 @@ class MealDetailsFragment(private val id: Int) : Fragment(R.layout.meal_details)
         mealDetailsViewModel.getMeal(id.toString())
 
         Handler(Looper.getMainLooper()).postDelayed({
-
             mealSaveButton.setOnClickListener {
                 val fragment = MealSaveFragment(mealDetailsViewModel.meals.value?.get(0))
                 parentFragmentManager.beginTransaction()
                     .replace(R.id.mainFL, fragment)
                     .addToBackStack(null)
                     .commit()
+            }
+
+            val frag = parentFragmentManager.findFragmentByTag("DailyPlanFragment")
+
+            if (frag != null && frag.isInBackStack()) {
+                mealSaveButton.setOnClickListener {
+                    planViewModel.setSelectedMeal(meal)
+
+                    if (frag is DailyPlanFragment) {
+                        frag.selectedMeal = meal
+                    }
+
+                    parentFragmentManager.popBackStack(
+                        "DailyPlanFragment",
+                        FragmentManager.POP_BACK_STACK_INCLUSIVE
+                    )
+                }
             }
 
             mealDetailsStr.text = mealDetailsViewModel.meals.value?.get(0)?.strMeal
@@ -92,5 +113,16 @@ class MealDetailsFragment(private val id: Int) : Fragment(R.layout.meal_details)
                 .load(mealDetailsViewModel.meals.value?.get(0)?.strMealThumb)
                 .into(mealDetailsThumb)
         }, 150)
+    }
+
+    private fun Fragment.isInBackStack(): Boolean {
+        val backStackCount = parentFragmentManager.backStackEntryCount
+        for (i in 0 until backStackCount) {
+            val backStackEntry = parentFragmentManager.getBackStackEntryAt(i)
+            if (backStackEntry.name == tag) {
+                return true
+            }
+        }
+        return false
     }
 }

@@ -1,9 +1,3 @@
 package raf.rs.nutritiontracker.model.entities
 
-class Area {
-    var strArea: String? = null
-
-    constructor(strArea: String?) {
-        this.strArea = strArea
-    }
-}
+class Area(var strArea: String?)

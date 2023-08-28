@@ -2,11 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/browseID"
-        android:title="Browse" />
+        android:icon="@drawable/browse"
+        android:title="@string/browse" />
     <item
         android:id="@+id/filterID"
-        android:title="Filter" />
+        android:icon="@drawable/filter"
+        android:title="@string/filter" />
     <item
         android:id="@+id/statsID"
-        android:title="Statistics" />
+        android:icon="@drawable/stats"
+        android:title="@string/stats" />
+    <item
+        android:id="@+id/planID"
+        android:icon="@drawable/plan"
+        android:title="@string/plan" />
 </menu>

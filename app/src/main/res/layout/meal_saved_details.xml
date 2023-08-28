@@ -146,7 +146,7 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:background="@color/green"
-            android:text="="
+            android:text="E"
             android:textColor="@color/white"
             android:textSize="34sp"
             app:layout_constraintBottom_toBottomOf="@+id/mealSavedThumb"

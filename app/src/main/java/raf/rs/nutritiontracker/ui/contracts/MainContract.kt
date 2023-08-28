@@ -6,6 +6,7 @@ import raf.rs.nutritiontracker.model.entities.Area
 import raf.rs.nutritiontracker.model.entities.Category
 import raf.rs.nutritiontracker.model.entities.Ingredient
 import raf.rs.nutritiontracker.model.entities.Meal
+import raf.rs.nutritiontracker.model.entities.MealCount
 import raf.rs.nutritiontracker.model.entities.MealDBEntity
 import raf.rs.nutritiontracker.model.entities.MealDetails
 
@@ -56,6 +57,7 @@ interface MainContract {
     interface DBViewModel {
         val mealDB: LiveData<MealDBEntity>
         val mealsDB: LiveData<List<MealDBEntity>>
+        val mealsSevenDaysDB: LiveData<List<MealCount>>
 
         fun insertMealInDB(mealDBEntity: MealDBEntity, callback: MealDBCallback)
         fun deleteAllMealsFromDB(callback: MealDBCallback)
@@ -63,10 +65,29 @@ interface MainContract {
         fun getAllMealsFromDB()
         fun getMealByIDFromDB(id: Int)
         fun updateMealInDB(mealDBEntity: MealDBEntity, callback: MealDBCallback)
+
+        fun getMealsForLastSevenDaysFromDB()
     }
 
     interface MealDBCallback {
         fun onMealSuccess()
         fun onMealError(error: Throwable)
+    }
+
+    interface PlanViewModel {
+        var chosenPlan: MutableLiveData<Map<String, Map<String, Meal>>>
+
+        var selectedMeal: MutableLiveData<Meal?>
+        var selectedDay: MutableLiveData<String?>
+        var selectedDayPeriod: MutableLiveData<String?>
+
+        fun insertMealInDay(day: String, dayPeriod: String, meal: Meal)
+        fun getSelectedMeal(): Meal?
+        fun getSelectedDay(): String?
+        fun getSelectedDayPeriod(): String?
+        fun getChosenPlan(): LiveData<Map<String, Map<String, Meal>>>
+        fun setSelectedMeal(meal: Meal?)
+        fun setSelectedDay(day: String?)
+        fun setSelectedDayPeriod(day: String?)
     }
 }
