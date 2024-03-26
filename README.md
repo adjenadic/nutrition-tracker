@@ -1,11 +1,10 @@
 # Nutrition Tracker
 ## Summary
 
-The Nutrition Tracker is an Android application designed for managing dietary habits. It integrates with the MealDB API, offering a catalog of meals. Key features include meal access, filtering, sorting, detailed statistics, and a weekly meal planning tool.
+Nutrition Tracker is an Android application designed for managing dietary habits, made for a mobile application course. It integrates the [MealDB API](https://www.themealdb.com/api.php) in order to provide features, which include: meal access, filtering, sorting, detailed statistics, and a weekly meal planning tool.
 
 ### Key Features:
-- **Meal Catalogue:** Access meals through the MealDB API.
-- **Filter and Sort:** Easily find specific meals with intuitive options.
+- **Meal Catalogue:** Accessing, saving, sorting, and filtering meals.
 - **Statistics:** View detailed nutritional intake statistics.
-- **Weekly Planning:** Plan meals for the week with the built-in feature.
+- **Weekly Planning:** Select a number of meals for every meal of the day and create a personal weekly meal plan.
 - **User Profiles:** Create profiles to store meals and weekly plans.
